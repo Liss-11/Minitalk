@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afrolova <afrolova@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 00:16:46 by afrolova          #+#    #+#             */
-/*   Updated: 2023/05/29 01:38:09 by afrolova         ###   ########.fr       */
+/*   Created: 2023/05/29 00:13:47 by afrolova          #+#    #+#             */
+/*   Updated: 2023/05/29 01:39:12 by afrolova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../INC/minitalk.h"
+#include "../LIBFT_PRINTF/INC/ft_printf.h"
 
-# include <signal.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include "../LIBFT_PRINTF/INC/ft_printf.h"
+int main(void)
+{
+	pid_t	process_id;
+	pid_t	parent_process_id;
 
-// Client
+	process_id = getpid();
+	parent_process_id = getppid();
 
-int	main(void);
+	//ft_printf("hola");
 
-//Server
+	printf("Process id: %d\n", process_id);
+	printf("Paretn process id: %d \n", parent_process_id);
 
-
-
-#endif
+	return (0);
+}
