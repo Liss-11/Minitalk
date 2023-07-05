@@ -6,7 +6,7 @@
 #    By: afrolova <afrolova@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/26 10:44:37 by afrolova          #+#    #+#              #
-#    Updated: 2023/05/29 02:48:14 by afrolova         ###   ########.fr        #
+#    Updated: 2023/07/06 00:11:48 by alissiafrolov    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,15 @@ WHITE = \033[0;97m
 
 #LIBRARY
 
-LIBFTPRINTF = LIBFT_PRINTF/libftprintf.a
+LIBFT = libft/libftprintf.a
 
 #FOLDERS
 
-DIR_OBJS_CLIENT = OBJS_CLIENT
-DIR_OBJS_SERVER = OBJS_SERVER 
+CLIENT = client
+SERVER = server
 
 
-LIB_INC = LIBFT_PRINTF/INC
+LIB_INC = libft/INC
 HEADER = INC/minitalk.h
 
 
@@ -45,11 +45,13 @@ RM = rm -rf
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 
-#OBJ_CLIENT = $(addprefix OBJS_CLIENT/, $(SRCS_CLIENT/client.o))
+SRC_CLIENT = CLIENT/client.c
+
+OBJ_CLIENT =  CLIENT/client.o
 #OBJ_SERVER = SRCS_SERVER/server.o
 
 all:
-						$(MAKE) -C LIBFT_PRINTF
+						$(MAKE) -C LIBFT
 						$(MAKE) $(NAME)
 
 $(NAME)::				
@@ -59,13 +61,13 @@ $(NAME)::
 $(NAME)::
 						@echo "$(GREEN)\t\t\t\t\t Minitalk is compiled! $(END_COLOR)"
 
-$(DIR_OBJS_CLIENT)%.o:	SRCS_CLIENT/%.c Makefile $(LIBFTPRINTF)
+$(CLIENT)/%.o:			$(CLIENT)/%.c Makefile $(LIBFT)
 						@$(CC) $(FLAGS) -IINC -I $(LIB_INC) -c $< -o $@
 
 
 
-$(C_NAME)::				$(DIR_OBJS_CLIENT) $(LIBFTPRINTF) $(HEADER) $(OBJ_CLIENT)
-						$(CC) $(FLAGS) $(LIBFTPRINTF) SRCS_CLIENT/client.c -o $(C_NAME)
+$(C_NAME)::				$(CLIENT) $(LIBFT) $(HEADER) $(OBJ_CLIENT)
+						$(CC) $(FLAGS) $(LIBFT) $(SRC_CLIENT) -o $(C_NAME)
 						@echo "$(YELLOW) \t\t\t\t\t Compiling Client......$(END_COLOR)"
 
 $(C_NAME)::
@@ -80,26 +82,18 @@ $(C_NAME)::
 #$(S_NAME)::
 #						@echo "$(GRENN) \t\t\t\t\t Servert Compiled! $(END_COLOR)"
 	
-$(DIR_OBJS_CLIENT):
-						@-mkdir $(DIR_OBJS_CLIENT)
-		
-
-#$(DIR_OBJS_SERVER):
-#						@-mkdir $(DIR_OBJS_SERVER)
 
 clean:
-						@$(RM) $(OBJS_CLIENT)
-						@$(RM) $(OBJS_SERVER)
-						@$(MAKE) clean -C LIBFT_PRINTF
-						@$(RM) $(DIR_OBJS_CLIENT)
-						@$(RM) $(DIR_OBJS_SERVER)
+						@$(RM) $(OBJ_CLIENT)
+#						@$(RM) $(OBJS_SERVER)
+						@$(MAKE) clean -C LIBFT
 						@echo "$(CYAN)\t\t\t\t\t All object files are cleaned $(END_COLOR)"
 
 fclean:					
 						@$(MAKE) clean
 						@$(RM) $(NAME_SERVER)
 						@$(RM) $(NAME_CLIENT)
-						@$(MAKE) fclean -C LIBFT_PRINTF
+						@$(MAKE) fclean -C LIBFT
 						@echo "$(CYAN)\t\t\t\t\t All cleaned! $(NED_COLOR)"
 
 re:						
