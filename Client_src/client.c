@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: afrolova <afrolova@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 00:13:47 by afrolova          #+#    #+#             */
-/*   Updated: 2023/07/06 00:42:29 by alissiafrolov    ###   ########.fr       */
+/*   Created: 2023/05/29 00:16:46 by afrolova          #+#    #+#             */
+/*   Updated: 2023/07/08 17:37:39 by alissiafrolov    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../printf_plus/INC/ft_printf.h"
 #include "../INC/minitalk.h"
-#include "../libft/INC/ft_printf.h"
 
-void	ft_isbit(unsigned char str, int pid)
+void	ft_bit(unsigned char str, int pid)
 {
 	int	bit;
 
@@ -41,7 +41,7 @@ void	ft_send_sig(int pid, char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_isbit(str[i], pid);
+		ft_bit(str[i], pid);
 		i++;
 	}
 }
@@ -51,9 +51,9 @@ int	main(int argc, char **argv)
 	int	pid;
 
 	if (argc != 3)
-		ft_error("Error\nIncorrect numbers of args\n");
+		ft_error("Error\nNumber of args incorrect\n");
 	pid = ft_atoi(argv[1]);
-	ft_printf("PID value: %d\n", pid);
+	ft_printf("Valor de pid: %d\n", pid);
 	ft_send_sig(pid, argv[2]);
 	return (0);
 }
